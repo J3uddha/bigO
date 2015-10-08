@@ -18,7 +18,7 @@ arr = [0, 1, 5, 7]
 bad_two_sum?(arr, 6)
 bad_two_sum?(arr, 10)
 
-# This is o(n^2+n) AKA o(n^2)
+# This is O(n^2 + n^2) AKA O(n^2)
 
 
 def okay_two_sum?(arr, target_sum)
@@ -86,6 +86,7 @@ def four_sum?(arr, target_sum)
   end
   arr.each do |third|
     new_target = new_target - third
+    p new_target
     nums[third] -= 1
   end
   return true if nums[new_target] > 0
