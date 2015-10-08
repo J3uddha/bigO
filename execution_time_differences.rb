@@ -37,3 +37,31 @@ def largest_contiguous_subsum(list)
 
   largest_sum
 end
+
+def largest_contiguous_subsum(list)
+  largest_sum = list.first
+  start = 0
+  list.count.times do |i|
+    largest_sum = list[start..i].inject(:+) if list[start..i].inject(:+) > largest_sum
+    if list[i] > list[start..i].inject(:+)
+      start = i
+      largest_sum = list[i]
+    end
+  end
+
+  largest_sum
+end
+
+def largest_contiguous_subsum(list)
+  largest_sum = list.first
+  curr_sum = list.first
+  start = 0
+  list.each do |el|
+    curr_sum += el
+    largest_sum = curr_sum if curr_sum > largest_sum
+    curr_sum = 0 if curr_sum < 0
+    #largest_sum, curr_sum = el, el if el > largest_sum
+  end
+
+  largest_sum
+end
