@@ -39,7 +39,59 @@ def binary_search(arr, target)
   when 0
     arr[split]
   when 1
-    result = binary_search(arr.take(split), target)
-    result.nil? ? nil : (split + 1) + result
+    result = binary_search(arr.drop(split + 1), target)
+    (result.nil?) ? nil : (split + 1) + result
   end
 end
+
+def pair_sum?(arr, target_sum)
+  # arr.sort
+  nums = Hash.new(0)
+  arr.each do |el|
+    nums[el] += 1
+  end
+
+  arr.each do |first|
+    new_target = target_sum - first
+    nums[first] -= 1
+    return true if nums[new_target] > 0
+  end
+
+  false
+end
+
+
+
+arr = [0, 1, 5, 7]
+pair_sum?(arr, 6)
+pair_sum?(arr, 10)
+
+
+
+def four_sum?(arr, target_sum)
+  arr.sort
+  new_target = 0
+  nums = Hash.new(0)
+  arr.each do |el|
+    nums[el] += 1
+  end
+
+  arr.each do |first|
+    new_target = target_sum - first
+    nums[first] -= 1
+  end
+  arr.each do |second|
+    new_target = new_target - second
+    nums[second] -= 1
+  end
+  arr.each do |third|
+    new_target = new_target - third
+    nums[third] -= 1
+  end
+  return true if nums[new_target] > 0
+  false
+end
+
+arr = [0, 1, 5, 7]
+four_sum?(arr, 6)
+four_sum?(arr, 13)
